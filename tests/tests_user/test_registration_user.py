@@ -25,10 +25,7 @@ class TestUserRegistration:
             )
 
         with allure.step("Проверить тело ответа"):
-            try:
-                response_data = response.json()
-            except ValueError:
-                assert False, f"Response is not JSON: {response.text}"
+            response_data = response.json()
 
             assert "user" in response_data, AssertMessages.FIELD_MISSING.format(
                 field_name="user"
@@ -39,7 +36,6 @@ class TestUserRegistration:
             assert "access_token" in response_data, AssertMessages.FIELD_MISSING.format(
                 field_name="access_token"
             )
-            # Исправлено: было 'access_token' in response_data['access_token'] — это ошибка
 
     @allure.title("Создание пользователя - пользователь уже существует")
     @allure.description(
@@ -63,10 +59,7 @@ class TestUserRegistration:
             )
 
         with allure.step("Проверить сообщение об ошибке в ответе"):
-            try:
-                response_data = response.json()
-            except ValueError:
-                assert False, f"Response is not JSON: {response.text}"
+            response_data = response.json()
 
             actual_message = response_data.get("message", "")
             assert (

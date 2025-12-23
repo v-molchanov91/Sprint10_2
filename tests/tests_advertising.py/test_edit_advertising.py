@@ -110,10 +110,7 @@ class TestEditAdvertising:
             )
 
         with allure.step("Проверить сообщение об ошибке"):
-            try:
-                response_data = response.json()
-            except ValueError:
-                assert False, f"Response is not JSON: {response.text}"
+            response_data = response.json()
 
             actual_message = response_data.get("message")
             assert (

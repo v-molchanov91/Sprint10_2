@@ -38,15 +38,7 @@ def register_and_login_user():
         headers = {"Authorization": f"Bearer {token}"}
     except (KeyError, ValueError):
         pytest.fail("Registration response missing access_token")
-
-    # Опционально: делаем запрос на login (если API требует отдельного входа)
-    # Если login не нужен (токен уже есть), можно пропустить
     login_response = ApiClient.post_request_login_user(payload)
-    if login_response.status_code != 201:
-        # Раскомментируй, если login обязателен. Иначе — игнорируем.
-        # pytest.fail(f"Failed to login user: {login_response.status_code}, {login_response.text}")
-        pass  # или оставить как есть, если токен из /register валиден
-
     return payload, headers
 
 

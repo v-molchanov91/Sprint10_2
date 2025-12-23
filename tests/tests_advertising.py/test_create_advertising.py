@@ -26,11 +26,7 @@ class TestCreateAdvertising:
             )
 
         with allure.step("Проверить тело ответа"):
-            try:
-                response_data = response.json()
-            except ValueError:
-                assert False, f"Response is not JSON: {response.text}"
-
+            response_data = response.json()
             assert "id" in response_data, AssertMessages.FIELD_MISSING.format(
                 field_name="id"
             )

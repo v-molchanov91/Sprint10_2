@@ -25,10 +25,7 @@ class TestDeleteAdvertsing:
             )
 
         with allure.step("Проверить, что ответ — валидный JSON"):
-            try:
-                response_data = response.json()
-            except ValueError:
-                assert False, f"Response is not JSON: {response.text}"
+            response_data = response.json()
 
         with allure.step("Проверить сообщение об успешном удалении"):
             assert "message" in response_data, AssertMessages.FIELD_MISSING.format(
